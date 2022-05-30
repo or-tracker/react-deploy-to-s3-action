@@ -43,6 +43,11 @@ EOF
 # - Build react bundle
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
+
+echo "cd ${WORKING_DIRECTORY}"
+echo "sh -c 'yarn'"
+echo "sh -c '${NODE_ENV_PREPEND} yarn build'"
+
 sh -c "cd ${WORKING_DIRECTORY}" \
 && sh -c "yarn" \
 && sh -c "${NODE_ENV_PREPEND} yarn build" \
