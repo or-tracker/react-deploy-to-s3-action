@@ -60,7 +60,7 @@ cd packages \
 && yarn \
 && ls -lah \
 && cat package.json \
-&& "${NODE_ENV_PREPEND} yarn build" \
+&& yarn build \
 && aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile react-deploy-to-s3-action \
               --no-progress \
