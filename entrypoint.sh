@@ -52,19 +52,19 @@ sh -c "ls -lah"
 sh -c "cat package.json"
 
 
-sh -c "cd packages" \
-&& sh -c "ls -lah" \
-&& sh -c "cd ts-front-end"
-&& sh -c "ls -lah" \
-&& sh -c "pwd" \
-&& sh -c "yarn" \
-&& sh -c "ls -lah" \
-&& sh -c "cat package.json" \
-&& sh -c "${NODE_ENV_PREPEND} yarn build" \
-&& sh -c "aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+cd packages \
+&& ls -lah \
+&& cd ts-front-end \
+&& ls -lah \
+&& pwd \
+&& yarn \
+&& ls -lah \
+&& cat package.json \
+&& ${NODE_ENV_PREPEND} yarn build \
+&& aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile react-deploy-to-s3-action \
               --no-progress \
-              ${ENDPOINT_APPEND} $*"
+              ${ENDPOINT_APPEND} $*
 SUCCESS=$?
 
 if [ $SUCCESS -eq 0 ]
