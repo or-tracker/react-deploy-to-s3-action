@@ -47,9 +47,14 @@ EOF
 echo "cd ${WORKING_DIRECTORY}"
 echo "sh -c 'yarn'"
 echo "sh -c '${NODE_ENV_PREPEND} yarn build'"
+sh -c "pwd"
+sh -c "ls -lah"
+
 
 sh -c "cd ${WORKING_DIRECTORY}" \
 && sh -c "yarn" \
+&& sh -c "pwd" \
+&& sh -c "ls -lah" \
 && sh -c "${NODE_ENV_PREPEND} yarn build" \
 && sh -c "aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile react-deploy-to-s3-action \
