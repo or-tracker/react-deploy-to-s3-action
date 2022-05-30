@@ -44,17 +44,22 @@ EOF
 # - Sync using our dedicated profile and suppress verbose messages.
 #   All other flags are optional via the `args:` directive.
 
-echo "cd ${WORKING_DIRECTORY}"
+echo "sh -c 'cd ${WORKING_DIRECTORY}'"
 echo "sh -c 'yarn'"
 echo "sh -c '${NODE_ENV_PREPEND} yarn build'"
 sh -c "pwd"
 sh -c "ls -lah"
+sh -c "cat package.json"
 
 
-sh -c "cd ${WORKING_DIRECTORY}" \
-&& sh -c "yarn" \
-&& sh -c "pwd" \
+sh -c "cd packages" \
 && sh -c "ls -lah" \
+&& sh -c "cd ts-front-end"
+&& sh -c "ls -lah" \
+&& sh -c "pwd" \
+&& sh -c "yarn" \
+&& sh -c "ls -lah" \
+&& sh -c "cat package.json" \
 && sh -c "${NODE_ENV_PREPEND} yarn build" \
 && sh -c "aws s3 sync ${SOURCE_DIR:-public} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile react-deploy-to-s3-action \
